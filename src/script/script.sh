@@ -1,10 +1,18 @@
 #!/bin/sh
-
 # ebook2ogg $nomDuFichier
 
-echo COUCOU  $1
+TITLE="`echo $1 | sed 's/.epub//'`"
+TMP_DIR="/home/max/tmpfs/"
 
-sleep 1
+mv $1 $TMP_DIR # TODO obligé ? arm 
+cd $TMP_DIR
 
+# 2 txt
+ebook-2txt "$TITLE.epub"
+# 2 ogg
+ana-ogg "$TITLE.txt"
+# 2 zip
+zip "$TITLE.zip" "$TITLE.txt_ogg/"
 
-echo "/home/conrad/epub-to-ogg/src/script/sample.ogg"
+# return final zip filename
+echo "$TMP_DIR/$TITLE.zip"
