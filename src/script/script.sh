@@ -1,10 +1,15 @@
 #!/bin/sh
 # ebook2ogg $nomDuFichier
 
-TITLE="`echo $1 | sed 's/.epub//'`"
-TMP_DIR="/home/max/tmpfs/"
+PATH_ANA="/home/max/unison-barrage/bin"
+PATH=$PATH:$PATH_ANA
+. $PATH_ANA/ana-cfg
 
-mv $1 $TMP_DIR # TODO obligé ? arm 
+FILENAME="`basename $1`"
+TITLE="`echo $FILENAME | sed 's/.epub//'`"
+
+mv $1 $TMP_DIR/$TITLE.epub # TODO obligé ? arm 
+
 cd $TMP_DIR
 
 # 2 txt
